@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=42"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "json_helper"
+version = "0.1.0"
+description = "A Linux command-line tool to manage json files"
+authors = [{ name = "Kathy" }]
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+build = ["pytest>=7.0", "pyinstaller>=6.0"]
+
+[project.scripts]
+json-helper = "json_helper.main:main"
