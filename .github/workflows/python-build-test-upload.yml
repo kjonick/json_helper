@@ -54,7 +54,7 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v4
         with:
-          name: app-build
+          name: build-output
           path: dist/
 
       - name: Publish to GitHub Release
