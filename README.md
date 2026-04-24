@@ -17,7 +17,16 @@ A Linux command-line tool for managing JSON files.
 - `pytest >= 7.0` (for running tests)
 - `PyInstaller >= 6.0` (for building the executable)
 
-## Setup
+## CI / Build Artifacts
+
+Builds are automated via GitHub Actions. 
+
+- **Pull requests** - runs the test suite and builds the binary to validate the change.
+- **Merge to `main`** - runs the test suite, builds the binary, and uploads `dist/json_helper` as a downloadable artifact
+
+The latest artifact can be downloaded from the **Actions** tab in the GitHub repository.
+
+## Local Development Setup
 
 Create and activate a virtual environment:
 
@@ -32,7 +41,15 @@ Install the package with build dependencies (includes pytest and pyinstaller):
 pip install -e .[build]
 ```
 
-## Build (Standalone Executable)
+## Testing Locally
+
+Run all tests:
+
+```bash
+python -m pytest tests/ -v
+```
+
+## Building Locally (Standalone Executable)
 
 Build the executable:
 
@@ -44,14 +61,6 @@ The compiled binary will be in:
 
 ```
 dist/json_helper
-```
-
-## Test
-
-Run all tests:
-
-```bash
-python -m pytest tests/ -v
 ```
 
 ## Install
