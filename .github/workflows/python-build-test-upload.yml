@@ -51,6 +51,11 @@ jobs:
 #    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
     steps:
+      - name: Create test tag
+        run: |
+          git tag test-release-${{ github.run_id }}
+          git push origin test-release-${{ github.ru
+
       - name: Download artifact
         uses: actions/download-artifact@v4
         with:
