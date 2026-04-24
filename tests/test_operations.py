@@ -6,12 +6,12 @@ import pytest
 from json_helper.operations import copy_file, create_file, delete_file, merge_files
 
 skip_if_root = pytest.mark.skipif(
-    os.getuid() == 0,
-    reason="root bypasses permission checks"
+    os.getuid() == 0, reason="root bypasses permission checks"
 )
 
 
 # ── create_file ──────────────────────────────────────────────────────────────
+
 
 class TestCreateFile:
     def test_creates_empty_json(self, tmp_path):
@@ -33,6 +33,7 @@ class TestCreateFile:
 
 
 # ── copy_file ─────────────────────────────────────────────────────────────────
+
 
 class TestCopyFile:
     def test_copies_file(self, tmp_path):
@@ -63,6 +64,7 @@ class TestCopyFile:
 
 # ── merge_files ───────────────────────────────────────────────────────────────
 
+
 class TestMergeFiles:
     def test_merges_two_files(self, tmp_path):
         f1 = tmp_path / "a.json"
@@ -87,13 +89,17 @@ class TestMergeFiles:
         f2 = tmp_path / "b.json"
         f2.write_text("{}\n")
         with pytest.raises(FileNotFoundError, match="not found"):
-            merge_files(str(tmp_path / "ghost.json"), str(f2), str(tmp_path / "out.json"))
+            merge_files(
+                str(tmp_path / "ghost.json"), str(f2), str(tmp_path / "out.json")
+            )
 
     def test_raises_if_file2_missing(self, tmp_path):
         f1 = tmp_path / "a.json"
         f1.write_text("{}\n")
         with pytest.raises(FileNotFoundError, match="not found"):
-            merge_files(str(f1), str(tmp_path / "ghost.json"), str(tmp_path / "out.json"))
+            merge_files(
+                str(f1), str(tmp_path / "ghost.json"), str(tmp_path / "out.json")
+            )
 
     @skip_if_root
     def test_raises_if_output_not_writable(self, tmp_path):
@@ -112,6 +118,7 @@ class TestMergeFiles:
 
 
 # ── delete_file ───────────────────────────────────────────────────────────────
+
 
 class TestDeleteFile:
     def test_deletes_file(self, tmp_path):

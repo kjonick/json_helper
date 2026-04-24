@@ -5,8 +5,8 @@ import pytest
 
 from json_helper.main import build_parser, main
 
-
 # ── help ──────────────────────────────────────────────────────────────────────
+
 
 def test_no_args_prints_help(capsys):
     with patch("sys.argv", ["json-helper"]):
@@ -24,6 +24,7 @@ def test_help_flag_exits_zero():
 
 
 # ── new ───────────────────────────────────────────────────────────────────────
+
 
 def test_new_creates_file(tmp_path):
     target = tmp_path / "test.json"
@@ -45,6 +46,7 @@ def test_new_prints_error_if_file_exists(tmp_path, capsys):
 
 # ── copy ──────────────────────────────────────────────────────────────────────
 
+
 def test_copy_creates_destination(tmp_path):
     src = tmp_path / "src.json"
     src.write_text('{"key": "value"}\n')
@@ -56,7 +58,15 @@ def test_copy_creates_destination(tmp_path):
 
 
 def test_copy_prints_error_if_source_missing(tmp_path, capsys):
-    with patch("sys.argv", ["json-helper", "copy", str(tmp_path / "missing.json"), str(tmp_path / "dst.json")]):
+    with patch(
+        "sys.argv",
+        [
+            "json-helper",
+            "copy",
+            str(tmp_path / "missing.json"),
+            str(tmp_path / "dst.json"),
+        ],
+    ):
         with pytest.raises(SystemExit) as exc:
             main()
     assert exc.value.code == 1
@@ -64,6 +74,7 @@ def test_copy_prints_error_if_source_missing(tmp_path, capsys):
 
 
 # ── merge ─────────────────────────────────────────────────────────────────────
+
 
 def test_merge_produces_output(tmp_path):
     f1 = tmp_path / "a.json"
@@ -79,7 +90,16 @@ def test_merge_produces_output(tmp_path):
 def test_merge_prints_error_if_file_missing(tmp_path, capsys):
     f1 = tmp_path / "a.json"
     f1.write_text("{}\n")
-    with patch("sys.argv", ["json-helper", "merge", str(f1), str(tmp_path / "missing.json"), str(tmp_path / "out.json")]):
+    with patch(
+        "sys.argv",
+        [
+            "json-helper",
+            "merge",
+            str(f1),
+            str(tmp_path / "missing.json"),
+            str(tmp_path / "out.json"),
+        ],
+    ):
         with pytest.raises(SystemExit) as exc:
             main()
     assert exc.value.code == 1
@@ -87,6 +107,7 @@ def test_merge_prints_error_if_file_missing(tmp_path, capsys):
 
 
 # ── delete ────────────────────────────────────────────────────────────────────
+
 
 def test_delete_removes_file(tmp_path):
     target = tmp_path / "to_delete.json"
@@ -102,4 +123,3 @@ def test_delete_prints_error_if_file_missing(tmp_path, capsys):
             main()
     assert exc.value.code == 1
     assert "Error:" in capsys.readouterr().out
-

@@ -2,6 +2,7 @@ import argparse
 
 from .operations import create_file, copy_file, merge_files, delete_file
 
+
 class TopLevelFormatter(argparse.HelpFormatter):
     def start_section(self, heading):
         if heading == "positional arguments":
@@ -10,6 +11,7 @@ class TopLevelFormatter(argparse.HelpFormatter):
             heading = "Options"
         super().start_section(heading)
 
+
 class SubcommandFormatter(argparse.HelpFormatter):
     def start_section(self, heading):
         if heading == "positional arguments":
@@ -17,6 +19,7 @@ class SubcommandFormatter(argparse.HelpFormatter):
         elif heading in ("options", "optionals"):
             heading = "Options"
         super().start_section(heading)
+
 
 class CustomParser(argparse.ArgumentParser):
     def format_help(self):
@@ -35,7 +38,7 @@ class CustomParser(argparse.ArgumentParser):
         # Remove argparse's description
         if self.description:
             formatted = formatted.replace(self.description, "")
-        
+
         # Remove argparse's default usage block
         if formatted.startswith("usage:"):
             formatted = formatted.split("\n", 1)[1]
@@ -67,7 +70,9 @@ def build_parser():
 
     # Options
     options = parser.add_argument_group("Options")
-    options.add_argument("-h", "--help", action="help", help="show this help message and exit")
+    options.add_argument(
+        "-h", "--help", action="help", help="show this help message and exit"
+    )
 
     # Commands
     subparsers = parser.add_subparsers(
@@ -86,7 +91,9 @@ def build_parser():
     copy_parser.add_argument("dest", help="Destination path")
 
     # merge
-    merge_parser = add_sub(subparsers, "merge", help="Merge two JSON files into a third")
+    merge_parser = add_sub(
+        subparsers, "merge", help="Merge two JSON files into a third"
+    )
     merge_parser.add_argument("file1", help="First JSON file")
     merge_parser.add_argument("file2", help="Second JSON file")
     merge_parser.add_argument("output", help="Output JSON file")
