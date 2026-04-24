@@ -1,0 +1,23 @@
+# Virtual environment
+.venv/
+
+# PyInstaller build output
+build/
+dist/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Package / install artifacts
+*.egg-info/
+*.egg
+.eggs/
+
+# Pytest cache
+.pytest_cache/
+
+# Distribution / packaging
+*.tgz
+*.tar.gz
+*.zip
