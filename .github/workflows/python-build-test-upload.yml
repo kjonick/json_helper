@@ -54,7 +54,7 @@ jobs:
       - name: Create test tag
         run: |
           git tag test-release-${{ github.run_id }}
-          git push origin test-release-${{ github.ru
+          git push origin test-release-${{ github.run_id }}
 
       - name: Download artifact
         uses: actions/download-artifact@v4
