@@ -1,12 +1,14 @@
 import json
 import os
 import stat
-
 import pytest
 
-skip_if_root = pytest.mark.skipif(os.getuid() == 0, reason="root bypasses permission checks")
-
 from json_helper.operations import copy_file, create_file, delete_file, merge_files
+
+skip_if_root = pytest.mark.skipif(
+    os.getuid() == 0,
+    reason="root bypasses permission checks"
+)
 
 
 # ── create_file ──────────────────────────────────────────────────────────────
