@@ -11,13 +11,7 @@ __pycache__/
 
 # Package / install artifacts
 *.egg-info/
-*.egg
-.eggs/
 
 # Pytest cache
 .pytest_cache/
 
-# Distribution / packaging
-*.tgz
-*.tar.gz
-*.zip
